@@ -1,0 +1,11 @@
+{
+  "allowedRoots": [
+    {
+      "path": "/home/gert/projects/personal-assistant",
+      "allowReadWrite": true,
+      "description": "Weekly prep agent Python code and account configs"
+    }
+  ],
+  "blockedPatterns": [".env", ".settings", "credentials.json", "token.json"],
+  "nonMainReadOnly": false
+}
