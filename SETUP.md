@@ -36,10 +36,7 @@ In the Claude Code session:
 /add-telegram-swarm
 ```
 
-This will ask for your Telegram bot token. Use the one from your `.env`:
-```
-8645269519:AAHIswV585jJwBOJbuL4R49rszUSZUqEqzM
-```
+This will ask for your Telegram bot token. Use the one from your `.env` file.
 
 Follow the prompts to complete Telegram setup.
 
@@ -132,7 +129,7 @@ CONTAINER_TIMEOUT=3600000
 MAX_CONCURRENT_CONTAINERS=2
 
 # Telegram
-TELEGRAM_BOT_TOKEN=8645269519:AAHIswV585jJwBOJbuL4R49rszUSZUqEqzM
+TELEGRAM_BOT_TOKEN=your-telegram-bot-token
 
 # Anthropic (for agent API calls — separate from Max subscription)
 ANTHROPIC_API_KEY=your-anthropic-api-key
