@@ -29,6 +29,25 @@ The `/setup` skill walks you through:
 3. Credential system (OneCLI for API key management)
 4. Timezone configuration (set to Europe/Brussels)
 
+### After /setup: enable systemd linger (Linux headless)
+
+`/setup` installs NanoClaw as a systemd **user** service (`systemctl --user`). By default, a user systemd instance only runs while the user has an active login session — so on a headless server the bot dies ~10 seconds after you SSH out, and stays down until you log back in.
+
+Enable linger once so the user manager (and NanoClaw with it) persists across logout and reboot:
+
+```bash
+sudo loginctl enable-linger $USER
+```
+
+Verify:
+
+```bash
+loginctl show-user $USER -p Linger   # expect: Linger=yes
+systemctl --user is-enabled nanoclaw # expect: enabled
+```
+
+Reversible with `sudo loginctl disable-linger $USER`. Not needed on macOS (launchd) or on machines where a user is always logged in.
+
 ## Step 2: Add Telegram channel
 
 In the Claude Code session:
@@ -173,6 +192,7 @@ Deep mode:
 
 ### Bot doesn't respond
 - Check NanoClaw service is running: `systemctl --user status nanoclaw`
+- If the service is inactive on a Linux server and nobody is currently logged in, confirm linger is on: `loginctl show-user $USER -p Linger` (must be `yes` — see Step 1)
 - Check logs: `tail -f logs/nanoclaw.log`
 - Verify Telegram bot token is correct
 - Ensure Group Privacy is disabled for the bot
