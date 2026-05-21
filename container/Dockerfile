@@ -27,6 +27,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Set Chromium path for agent-browser
+# Install Python 3 and prep-agent dependencies
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv && rm -rf /var/lib/apt/lists/*
+RUN python3 -m pip install --break-system-packages msal httpx google-auth google-auth-oauthlib google-api-python-client python-dotenv python-dateutil pyyaml python-docx openpyxl python-pptx
+
 ENV AGENT_BROWSER_EXECUTABLE_PATH=/usr/bin/chromium
 ENV PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium
 

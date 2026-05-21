@@ -475,6 +475,7 @@ async function runQuery(
       allowDangerouslySkipPermissions: true,
       settingSources: ['project', 'user'],
       mcpServers: {
+        ...(() => { try { const f = "/workspace/group/.mcp.json"; if (fs.existsSync(f)) return JSON.parse(fs.readFileSync(f, "utf-8")).mcpServers || {}; } catch(e) {} return {}; })(),
         nanoclaw: {
           command: 'node',
           args: [mcpServerPath],
